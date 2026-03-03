@@ -10,9 +10,26 @@ const loadLessons = ()=>{
     `
     fetch(url)
     .then(res=> res.json())
-    .then(data=>console.log(data)
-    )
+    .then(data => displayLevelWord(data.data))
     
+    
+ }
+ displayLevelWord =(words)=>{
+     const wordContainer =document.getElementById('word-container')
+    //  wordContainer.innerHTML =''
+
+     words.forEach(word => {
+      const card =document.createElement('div')
+      console.log(word);
+      card.innerHTML=`
+     
+      `
+       
+      wordContainer.append(card)
+      
+        
+     });
+     
  }
 
 
