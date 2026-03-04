@@ -1,3 +1,9 @@
+ const createExample =(arr)=>{
+  const spanElement = arr.map((el) => `<span class="btn bg-sky-200">${el}</span>`)
+  return spanElement.join(' ')
+ }
+
+
 const loadLessons = ()=>{
     fetch('https://openapi.programming-hero.com/api/levels/all')
     .then(res => res.json())
@@ -40,7 +46,7 @@ const loadLessons = ()=>{
     detailBox.innerHTML=`
               
          <div class="">
-          <h2 class="text-2xl font-bold"> ${word.word}(<i class="fa-solid fa-microphone-lines"></i> : ${word.pronunciation} )</h2>
+          <h2 class="text-2xl font-bold"> ${word.word} (<i class="fa-solid fa-microphone-lines"></i> : ${word.pronunciation} )</h2>
           <h2 class="text-1xl font-bold">Meaning</h2>
           <p>${word.meaning}</p>
         </div>
@@ -49,11 +55,11 @@ const loadLessons = ()=>{
           <p>${word.sentence}</p>
         </div>
         <div>
-          <h2 class="text-2xl font-bold">Synonyms</h2>
-          <span class="btn">sy1</span>
-          <span class="btn">sy1</span>
-          <span class="btn">sy1</span>
+          <h2 class="text-2xl font-bold mb-2">Synonyms</h2>
+            <div>${ createExample(word.synonyms)}</div>
+        
         </div>
+        
         <div class="modal-action">
       <form method="dialog">
         
