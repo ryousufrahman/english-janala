@@ -28,6 +28,45 @@ const loadLessons = ()=>{
      }) 
   }
 
+  const loadWordDetail= async(id)=>{
+    const url = `https://openapi.programming-hero.com/api/word/${id}`
+    const res =await fetch(url)
+    const detail =await res.json();
+    displaywordDetail(detail.data)  
+  }
+  const displaywordDetail =(word)=> {
+    console.log(word);
+    const detailBox = document.getElementById('details-box')
+    detailBox.innerHTML=`
+              
+         <div class="">
+          <h2 class="text-2xl font-bold"> ${word.word}(<i class="fa-solid fa-microphone-lines"></i> : ${word.pronunciation} )</h2>
+          <h2 class="text-1xl font-bold">Meaning</h2>
+          <p>${word.meaning}</p>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold">Example</h2>
+          <p>${word.sentence}</p>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold">Synonyms</h2>
+          <span class="btn">sy1</span>
+          <span class="btn">sy1</span>
+          <span class="btn">sy1</span>
+        </div>
+        <div class="modal-action">
+      <form method="dialog">
+        
+        <button class="btn">Close</button>
+      </form>
+    </div>
+    
+    `
+    document.getElementById('my_modal_5').showModal()
+    
+
+  }
+
  displayLevelWord =(words)=>{
      const wordContainer =document.getElementById('word-container')
      wordContainer.innerHTML =''
@@ -49,14 +88,14 @@ const loadLessons = ()=>{
 
      words.forEach(word => {
       const card =document.createElement('div')
-      console.log(word);
+
       card.innerHTML=`
             <div class="bg-white rounded-xl shadow-sm text-center py-10 px-5 space-y-4">
           <h2 class="font-bold text-2xl">${word.word ? word.word : ' word not found'}</h2>
         <p class="font-semibold">Meaning /Pronounciation</p>
          <div class=" font-medium font-bangla"> "${word.meaning ? word.meaning : 'meaning not found'} / ${word.pronunciation ? word.pronunciation :  'pronounciation not found'} "</div>
          <div class="flex justify-between items-center">
-          <button class="btn bg-[#1A91FF10] hover:bg-[#1A91FF80] "><i class="fa-solid fa-circle-info"></i></button>
+          <button onclick="loadWordDetail(${word.id})"  class="btn bg-[#1A91FF10] hover:bg-[#1A91FF80] "><i class="fa-solid fa-circle-info"></i></button>
           <button class="text-black btn bg-[#1A91FF10] hover:bg-[#1A91FF80]"><i class="fa-solid fa-volume-high"></i></button>
          </div>
        </div>
