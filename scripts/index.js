@@ -4,6 +4,12 @@ const loadLessons = ()=>{
     .then(json=> displayLessons(json.data));
 };
 
+  const removeActive =()=>{
+      const lessonbutton =document.querySelectorAll('.lesson-btn')
+     lessonbutton.forEach(btn=> btn.classList.remove('active'))
+
+  }
+
  const loadLevelWord =(id)=>{
     const url = `
         https://openapi.programming-hero.com/api/level/${id}
@@ -12,6 +18,7 @@ const loadLessons = ()=>{
     .then(res=> res.json())
     
     .then((data) => {
+      removeActive()
        const activeButton =document.getElementById(`click-button-${id}`);
       activeButton.classList.add('active')
      
