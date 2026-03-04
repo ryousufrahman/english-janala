@@ -3,6 +3,17 @@
   return spanElement.join(' ')
  }
 
+ const manageSpinner =(status)=>{
+  if(status==true){
+    document.getElementById('spinnar').classList.remove('hidden')
+    document.getElementById('word-container').classList.add('hidden')
+  }
+  else{
+     document.getElementById('word-container').classList.remove('hidden')
+    document.getElementById('spinnar').classList.add('hidden')
+  }
+ }
+
 
 const loadLessons = ()=>{
     fetch('https://openapi.programming-hero.com/api/levels/all')
@@ -17,6 +28,7 @@ const loadLessons = ()=>{
   }
 
  const loadLevelWord =(id)=>{
+     manageSpinner(true);
     const url = `
         https://openapi.programming-hero.com/api/level/${id}
     `
@@ -89,7 +101,8 @@ const loadLessons = ()=>{
     </div>
       
       `
-        
+      manageSpinner(false)
+     return;   
       }
 
      words.forEach(word => {
@@ -112,6 +125,7 @@ const loadLessons = ()=>{
       
         
      });
+     manageSpinner(false)
      
  }
 
