@@ -10,10 +10,17 @@ const loadLessons = ()=>{
     `
     fetch(url)
     .then(res=> res.json())
-    .then(data => displayLevelWord(data.data))
     
-    
- }
+    .then((data) => {
+       const activeButton =document.getElementById(`click-button-${id}`);
+      activeButton.classList.add('active')
+     
+       
+      displayLevelWord(data.data)
+       
+     }) 
+  }
+
  displayLevelWord =(words)=>{
      const wordContainer =document.getElementById('word-container')
      wordContainer.innerHTML =''
@@ -64,7 +71,7 @@ const displayLessons =(lessons)=>{
   for(let lesson of lessons){
     const btnDiv = document.createElement('div');
     btnDiv.innerHTML=`
-     <button onclick ="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary"><i class="fa-solid fa-book-open"></i>Lesson - ${lesson.level_no}</button>
+     <button  id="click-button-${lesson.level_no}" onclick ="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary lesson-btn"><i class="fa-solid fa-book-open"></i>Lesson - ${lesson.level_no}</button>
     
     `
     levelContainer.append(btnDiv)
