@@ -3,6 +3,12 @@
   return spanElement.join(' ')
  }
 
+  function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
+
  const manageSpinner =(status)=>{
   if(status==true){
     document.getElementById('spinnar').classList.remove('hidden')
@@ -115,7 +121,7 @@ const loadLessons = ()=>{
          <div class=" font-medium font-bangla"> "${word.meaning ? word.meaning : 'meaning not found'} / ${word.pronunciation ? word.pronunciation :  'pronounciation not found'} "</div>
          <div class="flex justify-between items-center">
           <button onclick="loadWordDetail(${word.id})"  class="btn bg-[#1A91FF10] hover:bg-[#1A91FF80] "><i class="fa-solid fa-circle-info"></i></button>
-          <button class="text-black btn bg-[#1A91FF10] hover:bg-[#1A91FF80]"><i class="fa-solid fa-volume-high"></i></button>
+          <button  onclick="pronounceWord('${word.word}')" class="text-black btn bg-[#1A91FF10] hover:bg-[#1A91FF80]"><i class="fa-solid fa-volume-high"></i></button>
          </div>
        </div>
 
